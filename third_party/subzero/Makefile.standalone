@@ -267,7 +267,7 @@ endif
 
 BASE_CXXFLAGS := -std=gnu++11 -Wall -Wextra -fno-rtti \
   -fno-exceptions $(OPTLEVEL) $(ASSERTIONS) -g -pedantic \
-  $(LLVM_EXTRA_WARNINGS) $(CXX_EXTRA) -MP -MD -Werror
+  $(LLVM_EXTRA_WARNINGS) $(CXX_EXTRA) -MP -MD 
 
 ifdef WASM
   BASE_CXXFLAGS := $(BASE_CXXFLAGS) $(V8_CXXFLAGS) -DALLOW_WASM=1

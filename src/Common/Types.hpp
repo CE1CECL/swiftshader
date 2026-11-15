@@ -19,7 +19,7 @@
 #include <limits>
 #include <type_traits>
 
-// GCC warns against bitfields not fitting the entire range of an enum with a fixed underlying type of unsigned int, which gets promoted to an error with -Werror and cannot be suppressed.
+// GCC warns against bitfields not fitting the entire range of an enum with a fixed underlying type of unsigned int, which gets promoted to an error with  and cannot be suppressed.
 // However, GCC already defaults to using unsigned int as the underlying type of an unscoped enum without a fixed underlying type. So we can just omit it.
 #if defined(__GNUC__) && !defined(__clang__)
 namespace {enum E {}; static_assert(!std::numeric_limits<std::underlying_type<E>::type>::is_signed, "expected unscoped enum whose underlying type is not fixed to be unsigned");}

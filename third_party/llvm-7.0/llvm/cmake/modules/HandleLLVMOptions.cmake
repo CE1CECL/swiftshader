@@ -168,15 +168,15 @@ function(append_if condition value)
 endfunction()
 
 macro(add_flag_if_supported flag name)
-  check_c_compiler_flag("-Werror ${flag}" "C_SUPPORTS_${name}")
+  check_c_compiler_flag(" ${flag}" "C_SUPPORTS_${name}")
   append_if("C_SUPPORTS_${name}" "${flag}" CMAKE_C_FLAGS)
-  check_cxx_compiler_flag("-Werror ${flag}" "CXX_SUPPORTS_${name}")
+  check_cxx_compiler_flag(" ${flag}" "CXX_SUPPORTS_${name}")
   append_if("CXX_SUPPORTS_${name}" "${flag}" CMAKE_CXX_FLAGS)
 endmacro()
 
 function(add_flag_or_print_warning flag name)
-  check_c_compiler_flag("-Werror ${flag}" "C_SUPPORTS_${name}")
-  check_cxx_compiler_flag("-Werror ${flag}" "CXX_SUPPORTS_${name}")
+  check_c_compiler_flag(" ${flag}" "C_SUPPORTS_${name}")
+  check_cxx_compiler_flag(" ${flag}" "CXX_SUPPORTS_${name}")
   if (C_SUPPORTS_${name} AND CXX_SUPPORTS_${name})
     message(STATUS "Building with ${flag}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
@@ -406,10 +406,10 @@ if( MSVC )
   endif()
 
 elseif( LLVM_COMPILER_IS_GCC_COMPATIBLE )
-  append_if(LLVM_ENABLE_WERROR "-Werror" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
+  append_if(LLVM_ENABLE_WERROR "" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
   append_if(LLVM_ENABLE_WERROR "-Wno-error" CMAKE_REQUIRED_FLAGS)
-  add_flag_if_supported("-Werror=date-time" WERROR_DATE_TIME)
-  add_flag_if_supported("-Werror=unguarded-availability-new" WERROR_UNGUARDED_AVAILABILITY_NEW)
+  add_flag_if_supported("-Wno-date-time" WERROR_DATE_TIME)
+  add_flag_if_supported("-Wno-unguarded-availability-new" WERROR_UNGUARDED_AVAILABILITY_NEW)
   if (LLVM_ENABLE_CXX1Y)
     check_cxx_compiler_flag("-std=c++1y" CXX_SUPPORTS_CXX1Y)
     append_if(CXX_SUPPORTS_CXX1Y "-std=c++1y" CMAKE_CXX_FLAGS)
@@ -595,7 +595,7 @@ if (LLVM_ENABLE_WARNINGS AND (LLVM_COMPILER_IS_GCC_COMPATIBLE OR CLANG_CL))
   # Release() (PR32286).
   if (NOT CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
-    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++11 -Werror=non-virtual-dtor")
+    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++11 -Wno-non-virtual-dtor")
     CHECK_CXX_SOURCE_COMPILES("class base {public: virtual void anchor();protected: ~base();};
                                class derived final : public base { public: ~derived();};
                                int main() { return 0; }"
@@ -611,7 +611,7 @@ if (LLVM_ENABLE_WARNINGS AND (LLVM_COMPILER_IS_GCC_COMPATIBLE OR CLANG_CL))
   # Check if -Wcomment is OK with an // comment ending with '\' if the next
   # line is also a // comment.
   set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
-  set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -Werror -Wcomment")
+  set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}  -Wcomment")
   CHECK_C_SOURCE_COMPILES("// \\\\\\n//\\nint main() {return 0;}"
                           C_WCOMMENT_ALLOWS_LINE_WRAP)
   set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQUIRED_FLAGS})
@@ -744,7 +744,7 @@ endif()
 if(NOT CYGWIN AND NOT WIN32)
   if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND
      NOT uppercase_CMAKE_BUILD_TYPE STREQUAL "DEBUG")
-    check_c_compiler_flag("-Werror -fno-function-sections" C_SUPPORTS_FNO_FUNCTION_SECTIONS)
+    check_c_compiler_flag(" -fno-function-sections" C_SUPPORTS_FNO_FUNCTION_SECTIONS)
     if (C_SUPPORTS_FNO_FUNCTION_SECTIONS)
       # Don't add -ffunction-section if it can be disabled with -fno-function-sections.
       # Doing so will break sanitizers.

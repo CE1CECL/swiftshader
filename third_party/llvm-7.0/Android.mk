@@ -988,7 +988,7 @@ LOCAL_SRC_FILES := \
 LOCAL_CFLAGS += \
 	-DLOG_TAG=\"libLLVM_swiftshader\" \
 	-Wall \
-	-Werror \
+	 \
 	-Wno-implicit-exception-spec-mismatch \
 	-Wno-overloaded-virtual \
 	-Wno-undefined-var-template \

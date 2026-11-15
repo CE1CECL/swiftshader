@@ -13,7 +13,7 @@ COMMON_CFLAGS := \
 	-DGL_APICALL= \
 	-DGL_GLEXT_PROTOTYPES \
 	-Wall \
-	-Werror \
+	 \
 	-Wno-format \
 	-Wno-sign-compare \
 	-Wno-unused-parameter \

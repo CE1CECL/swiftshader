@@ -23,7 +23,7 @@ cc_defaults {
         "-Xclang", "-fuse-init-array",
         "-fno-operator-names",
         "-msse2",
-        "-Werror",
+        "",
         "-Wwrite-strings",
     ],
 

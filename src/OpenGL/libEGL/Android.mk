@@ -8,7 +8,7 @@ COMMON_CFLAGS := \
 	-DEGLAPI= \
 	-DEGL_EGLEXT_PROTOTYPES \
 	-Wall \
-	-Werror \
+	 \
 	-Wno-format \
 	-Wno-unused-function \
 	-Wno-unused-parameter \

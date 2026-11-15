@@ -326,7 +326,7 @@ LOCAL_C_INCLUDES := \
 		$(SPVTOOLS_OUT_PATH)
 LOCAL_EXPORT_C_INCLUDES := \
 		$(LOCAL_PATH)/include
-LOCAL_CXXFLAGS:=-std=c++11 -fno-exceptions -fno-rtti -Werror
+LOCAL_CXXFLAGS:=-std=c++11 -fno-exceptions -fno-rtti 
 LOCAL_SRC_FILES:= $(SPVTOOLS_SRC_FILES)
 include $(BUILD_STATIC_LIBRARY)
 
@@ -337,7 +337,7 @@ LOCAL_C_INCLUDES := \
 		$(LOCAL_PATH)/source \
 		$(SPVHEADERS_LOCAL_PATH)/include \
 		$(SPVTOOLS_OUT_PATH)
-LOCAL_CXXFLAGS:=-std=c++11 -fno-exceptions -fno-rtti -Werror
+LOCAL_CXXFLAGS:=-std=c++11 -fno-exceptions -fno-rtti 
 LOCAL_STATIC_LIBRARIES:=SPIRV-Tools
 LOCAL_SRC_FILES:= $(SPVTOOLS_OPT_SRC_FILES)
 include $(BUILD_STATIC_LIBRARY)

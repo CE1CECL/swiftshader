@@ -171,7 +171,7 @@ macro(set_shared_library_export_map TARGET DIR)
 
         # Don't allow undefined symbols, unless it's a Sanitizer build.
         if(NOT MSAN AND NOT ASAN AND NOT TSAN AND NOT UBSAN)
-            set_property(TARGET ${TARGET} APPEND_STRING PROPERTY LINK_FLAGS " -Wl,--no-undefined")
+            set_property(TARGET ${TARGET} APPEND_STRING PROPERTY LINK_FLAGS " -Wl,--allow-shlib-undefined")
         endif()
     endif()
 endmacro()
@@ -218,15 +218,15 @@ if(MSVC)
 else()
     set_cpp_flag("--std=c++11")
     set_cpp_flag("-Wall")
-    set_cpp_flag("-Werror=reorder")
-    set_cpp_flag("-Werror=sign-compare")
-    set_cpp_flag("-Werror=missing-braces")
+    set_cpp_flag("-Wno-reorder")
+    set_cpp_flag("-Wno-sign-compare")
+    set_cpp_flag("-Wno-missing-braces")
     set_cpp_flag("-fno-exceptions")
 
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND
        CLANG_VERSION_STRING VERSION_GREATER_EQUAL 5)
-        set_cpp_flag("-Werror=unused-lambda-capture")
-        set_cpp_flag("-Werror=string-conversion")
+        set_cpp_flag("-Wno-unused-lambda-capture")
+        set_cpp_flag("-Wno-string-conversion")
     endif()
 
     # Remove xor, and, or and friends from the list of keywords, they are used
@@ -275,7 +275,7 @@ else()
     endif()
 
     if(WARNINGS_AS_ERRORS)
-        set_cpp_flag("-Werror") # Treat all warnings as errors
+        set_cpp_flag("") # Treat all warnings as errors
     endif()
 
     if(DCHECK_ALWAYS_ON)

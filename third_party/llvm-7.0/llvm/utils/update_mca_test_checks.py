@@ -62,7 +62,7 @@ def _parse_args():
   parser.add_argument('-w',
                       action='store_true',
                       help='suppress warnings')
-  parser.add_argument('-Werror',
+  parser.add_argument('',
                       action='store_true',
                       help='promote warnings to errors')
   parser.add_argument('--llvm-mca-binary',

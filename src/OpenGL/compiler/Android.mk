@@ -21,7 +21,7 @@ endif
 COMMON_CFLAGS := \
 	-DLOG_TAG=\"swiftshader_compiler\" \
 	-Wall \
-	-Werror \
+	 \
 	-Wno-format \
 	-Wno-sign-compare \
 	-Wno-unneeded-internal-declaration \

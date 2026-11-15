@@ -152,7 +152,7 @@ def add_options(parser):
     parser.add_option("--no-flavor-prefix", default=False, action="store_true",
                       help=("Do not append the build flavor to the install path"))
     parser.add_option("--enable-werror", default=False, action="store_true",
-                      help=("Build with -Werror"))
+                      help=("Build with "))
     return
 
 def check_options(parser, options, valid_builds):
